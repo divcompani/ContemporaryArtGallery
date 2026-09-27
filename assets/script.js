@@ -110,7 +110,14 @@ function drawEngineering() {
 }
 window.addEventListener('pointermove', e => {
   pointer.tx=e.clientX;pointer.ty=e.clientY;
-  const nx=e.clientX/innerWidth-.5, floats=document.querySelector('.architectural-floats');
+  const nx=e.clientX/innerWidth-.5, ny=e.clientY/innerHeight-.5, floats=document.querySelector('.architectural-floats');
+  root.style.setProperty('--cinema-x', `${nx*34}px`);
+  root.style.setProperty('--cinema-y', `${ny*24}px`);
+  root.style.setProperty('--cinema-x-neg', `${nx*-34}px`);
+  root.style.setProperty('--cinema-y-neg', `${ny*-24}px`);
+  root.style.setProperty('--cinema-tilt-x', `${ny*7}deg`);
+  root.style.setProperty('--cinema-tilt-y', `${nx*-8}deg`);
+  root.style.setProperty('--cinema-tilt-z', `${nx*3}deg`);
   floats.style.setProperty('--blade-x',`${nx*24}px`);
   floats.style.setProperty('--ribbon-x',`${nx*-34}px`);
   floats.style.setProperty('--stair-x',`${nx*18}px`);
@@ -121,6 +128,7 @@ window.addEventListener('scroll', () => {
   const max = document.documentElement.scrollHeight-innerHeight;
   document.querySelector('.progress span').style.width = `${max ? scrollY/max*100 : 0}%`;
   document.querySelector('.hero-image').style.setProperty('--hero-y', `${Math.min(scrollY*.12,100)}px`);
+  root.style.setProperty('--cinema-scroll-r', `${scrollY*.006}deg`);
   const floats=document.querySelector('.architectural-floats');
   floats.style.setProperty('--blade-y',`${scrollY*-.055}px`);
   floats.style.setProperty('--blade-r',`${-7+scrollY*.002}deg`);
